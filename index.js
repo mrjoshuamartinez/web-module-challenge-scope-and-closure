@@ -28,9 +28,15 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ * counter 1 has the var "count" inside the scope of the function, as counter 2 has "count" globally.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ * counter 1, var count is inside.
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * 
+ * counter 1 in a resetting count to 0 each time, counter 2 if you want to no have count reset to 0.
  *
 */
 
@@ -55,12 +61,18 @@ function counter2() {
 /* Task 2: inning() 
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
-
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+let homeTeam = [null];
+let awayTeam = [null];
+function inning(){
+  for (let i = 0; i < 9; i++){
+    homeTeam.push(Math.floor(Math.random() * Math.floor(3)));
+    awayTeam.push(Math.floor(Math.random() * Math.floor(3)));
+  }
+  console.log("Home : ", homeTeam);
+  console.log("Away : ", awayTeam);
 }
+
+inning();
 
 /* Task 3: finalScore()
 
@@ -76,11 +88,12 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
-
+function finalScore(funcName, specificInning) {
+  console.log("Home : ", homeTeam[specificInning]);
+  console.log("Away : ", awayTeam[specificInning]);
 }
+
+finalScore(inning, 5);
 
 /* Task 4: 
 
@@ -103,8 +116,26 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(funcName) {
+  function awayTeamFinal(total, num) {
+    return total + Math.round(num);
+  }
+  function homeTeamFinal(total, num) {
+    return total + Math.round(num);
+  }
+  console.log(`1st inning: ${awayTeam[1]} - ${homeTeam[1]}`);
+  console.log(`2nd inning: ${awayTeam[2]} - ${homeTeam[2]}`);
+  console.log(`3rd inning: ${awayTeam[3]} - ${homeTeam[3]}`);
+  console.log(`4th inning: ${awayTeam[4]} - ${homeTeam[4]}`);
+  console.log(`5th inning: ${awayTeam[5]} - ${homeTeam[5]}`);
+  console.log(`6th inning: ${awayTeam[6]} - ${homeTeam[6]}`);
+  console.log(`7th inning: ${awayTeam[7]} - ${homeTeam[7]}`);
+  console.log(`8th inning: ${awayTeam[8]} - ${homeTeam[8]}`);
+  console.log(`9th inning: ${awayTeam[9]} - ${homeTeam[9]}`);
+  console.log(' ');
+  console.log(`Final Score: ${awayTeam.reduce(awayTeamFinal, 0)} - ${homeTeam.reduce(homeTeamFinal, 0)}`);
 }
+
+scoreboard(inning);
 
 
